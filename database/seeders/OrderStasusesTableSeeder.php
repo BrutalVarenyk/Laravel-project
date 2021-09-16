@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrderStatus;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Config;
 
 class OrderStasusesTableSeeder extends Seeder
 {
@@ -13,6 +15,9 @@ class OrderStasusesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $statuses = Config::get('constants.db.order_statuses');
+        foreach ($statuses as $key => $status) {
+            OrderStatus::create(['name' => $status]);
+        }
     }
 }

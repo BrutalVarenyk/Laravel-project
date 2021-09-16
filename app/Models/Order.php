@@ -12,7 +12,6 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-        // TODO look at foreign key in migrations in orders
     }
 
     public function products()

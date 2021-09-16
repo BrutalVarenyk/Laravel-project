@@ -30,6 +30,7 @@ class UserFactory extends Factory
             '=',
             Config::get('constants.db.roles.customer')
         )->first();
+//        dd($role->id);
 
         return [
             'role_id' => $role->id,
