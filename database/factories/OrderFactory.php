@@ -36,12 +36,21 @@ class OrderFactory extends Factory
 
                 $quantity = rand(1,3);
 
+//                $order->products()->pivot->update([
+//                    'order_id' => $order->id,
+//                    'product_id' => $product->id,
+//                    'quantity' => $quantity,
+//                    'single_price' => $product->price
+//                ]);
+
                 $order->products()->newPivot([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'quantity' => $quantity,
                     'single_price' => $product->price
                 ])->save();
+
+                dd($order->products()->quantity);
 
                 $total += $quantity * $product->price;
             }
