@@ -1,17 +1,10 @@
-#Test.
-
 DirectoryIndex public/index.php
 
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteCond %{REQUEST_URI} !^public
 
-#<IfModule mod_rewrite.c>
-#    <IfModule mod_negotiation.c>
-#        Options -MultiViews -Indexes
-#    </IfModule>
-#
-#    RewriteEngine On
-#
-#    RewriteCond %{REQUEST_FILENAME} !-f
-#    RewriteCond %{REQUEST_FILENAME} !-d
-#
-#    RewriteRule ^(.*)$ public/index.php?$1 [L,QSA]
-#</IfModule>
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ public/index.php [L]
+</IfModule>
