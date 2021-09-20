@@ -1,7 +1,8 @@
 <div class="col-md-4">
     <div class="card mb-4 shadow-sm">
             @if($product->thumbnail)
-                <img src="{{ $product->thumbnail }}" height="255" class="card-img-top">
+{{--                <img src="{{ $product->thumbnail }}" height="200" class="card-img-top">--}}
+            <img src="{{ $product->thumbnail }}" class="card-img-top">
             @endif
         <div class="card-body">
             <p class="card-title">{{ __($product->title) }}</p>
