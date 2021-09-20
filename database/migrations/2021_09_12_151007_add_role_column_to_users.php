@@ -14,7 +14,7 @@ class AddRoleColumnToUsers extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('role')) {
+        if (!Schema::hasTable('role')) {
             Schema::table('users', function (Blueprint $table) {
                  if (!Schema::hasColumn('users', 'role_id')) {
                     $table->unsignedBigInteger('role_id')->after('id');
@@ -37,7 +37,8 @@ class AddRoleColumnToUsers extends Migration
         if (Schema::hasTable('users')) {
             Schema::table('users', function (Blueprint $table) {
                 if (Schema::hasColumn('users', 'role_id')) {
-                    $table->dropColumn('user_role_id_foreign');
+                    $table->dropForeign(['role_id']);
+                    $table->dropColumn('role_id');
                 }
             });
         }

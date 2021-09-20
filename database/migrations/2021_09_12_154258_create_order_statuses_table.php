@@ -13,7 +13,7 @@ class CreateOrderStatusesTable extends Migration
      */
     public function up()
     {
-        if(Schema::hasTable('order_statuses'))
+        if(!Schema::hasTable('order_statuses'))
         {
             Schema::create('order_statuses', function (Blueprint $table) {
                 $table->id();
