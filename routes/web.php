@@ -30,10 +30,6 @@ Route::get('products/{product}', [\App\Http\Controllers\ProductsController::clas
 Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('categories');
 Route::get('categories/{category}', [\App\Http\Controllers\CategoriesController::class, 'show'])->name('categories.show');
 
-
-
-
-
 Route::namespace('Account')->prefix('account')->name('account')->middleware('auth')->group(function (){
 
 });
@@ -42,18 +38,3 @@ Route::namespace('Admin')->prefix('admin')->name('admin')->middleware('auth')->g
 
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
