@@ -13,10 +13,11 @@ class CreateProductImagesTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('product_image')){
+        if (!Schema::hasTable('product_image')){
             Schema::create('product_images', function (Blueprint $table) {
                 $table->id();
                 $table->text('path');
+                $table->foreignId('product_id')->constrained('products');
                 $table->timestamps();
             });
         }
