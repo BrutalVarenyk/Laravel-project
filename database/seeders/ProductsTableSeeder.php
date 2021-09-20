@@ -17,9 +17,9 @@ class ProductsTableSeeder extends Seeder
 
     public function run()
     {
-        Category::factory(4)->create()->each(function ($category){
-           Product::factory(6, ['category_id' => $category->id])->create()->each(function ($product){
-                ProductImage::factory(rand(2,5), ['product_id' => $product->id])->create();
+        Category::factory(4)->create()->each(function ($category) {
+            Product::factory(6, ['category_id' => $category->id])->create()->each(function ($product) {
+                ProductImage::factory(rand(2, 5), ['product_id' => $product->id])->create();
             });
         });
     }

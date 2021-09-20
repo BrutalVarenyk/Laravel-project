@@ -25,16 +25,16 @@ class OrderFactory extends Factory
 
     public function configure()
     {
-        return $this->afterCreating(function (Order $order){
+        return $this->afterCreating(function (Order $order) {
 
             $total = 0;
             $id = [];
 
-            for($i = 0; $i < rand(1,3); $i++ ) {
+            for ($i = 0; $i < rand(1, 3); $i++) {
                 $product = Product::query()->whereNotIn('id', $id)->inRandomOrder()->first();
                 $id[] = $product->id;
 
-                $quantity = rand(1,3);
+                $quantity = rand(1, 3);
 
                 $order->products()->newPivot([
                     'order_id' => $order->id,
@@ -64,7 +64,7 @@ class OrderFactory extends Factory
             'country' => $this->faker->country,
             'city' => $this->faker->city,
             'address' => $this->faker->address,
-            'total' => $this->faker->randomFloat(2,4,100)
+            'total' => $this->faker->randomFloat(2, 4, 100)
         ];
     }
 }

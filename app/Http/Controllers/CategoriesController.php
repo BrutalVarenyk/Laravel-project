@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -20,8 +21,8 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Category $category
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return Response
      */
     public function show(Category $category)
     {
