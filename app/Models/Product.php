@@ -40,4 +40,14 @@ class Product extends Model
     {
         return $this->hasOne(OrderProduct::class);
     }
+
+    public function getPrice()
+    {
+        if (!is_null($this->discount)){
+            $price = $this->price - ($this->price * ($this->discount / 100));
+            return round($price, 2);
+        }else{
+            return $this->price;
+        }
+    }
 }
