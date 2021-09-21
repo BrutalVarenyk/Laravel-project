@@ -15,7 +15,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::query()->withCount('products')->paginate(10);
+
+        return view('categories/index', compact('categories'));
     }
 
     /**
@@ -26,7 +28,9 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $products = $category->products()->paginate(3);
+
+        return view('categories/show', compact('category', 'products'));
     }
 
 }
