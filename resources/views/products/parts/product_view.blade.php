@@ -23,7 +23,7 @@
                     {{ __('Show') }}
                 </a>
             </div>
-            <span class="text-muted">{{ $product->price }}</span>
+            <span class="text-muted">{{ $product->getPrice() }}</span>
         </div>
     </div>
 </div>
