@@ -22,6 +22,8 @@ class ProductImageFactory extends Factory
      */
     public function definition()
     {
+
+//        dd($this->faker->image(storage_path('images/products'), 400, 600));
         return [
             'path' => $this->faker->image(storage_path('images/products'), 400, 600)
         ];
