@@ -23,7 +23,13 @@
                     {{ __('Show') }}
                 </a>
             </div>
-            <span class="text-muted">{{ $product->getPrice() }}</span>
+            @if(is_null($product->discount))
+                <span class="text-muted">{{ $product->getPrice() }}</span>
+            @else
+                <span style="text-decoration: line-through; margin-right: 10px">{{ $product->price }}$</span>
+                <span class="text-muted">{{ $product->getPrice() }}$</span>
+                <span style="color: #761b18; margin-left:10px">-{{ $product->discount }}%</span>
+            @endif
         </div>
     </div>
 </div>
