@@ -15,7 +15,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::query()->withCount('products')->paginate(10);
+
+        return view('categories/index', compact('categories'));
     }
 
     /**
