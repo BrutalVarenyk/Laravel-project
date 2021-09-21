@@ -24,11 +24,27 @@ Route::get('products/{product}', [\App\Http\Controllers\ProductsController::clas
 Route::get('categories', [\App\Http\Controllers\CategoriesController::class, 'index'])->name('categories');
 Route::get('categories/{category}', [\App\Http\Controllers\CategoriesController::class, 'show'])->name('categories.show');
 
+// account/orders/5
 Route::namespace('Account')->prefix('account')->name('account')->middleware('auth')->group(function (){
 
 });
 
-Route::namespace('Admin')->prefix('admin')->name('admin')->middleware('auth')->group(function (){
+// admin/products/create
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth', 'admin')->group(function (){
+
+    Route::get('/', [\App\Http\Controllers\Admin\BoardController::class])->name('home'); // admin.home
+
+    Route::name('orders')->group(function (){
+        Route::get('orders', [\App\Http\Controllers\Admin\OrdersController::class, 'index']); // admin.orders
+        Route::get('orders/{order}/edit', [\App\Http\Controllers\Admin\OrdersController::class, 'edit'])->name('.edit'); // admin.orders.edit
+    });
+
+    Route::name('products')->group(function (){
+        Route::get('products', [\App\Http\Controllers\Admin\ProductsController::class, 'index']); //admin.orders
+        Route::get('products/{product}/edit', [\App\Http\Controllers\Admin\ProductsController::class, 'edit'])->name('.edit'); // admin.products.edit
+        Route::put('products/{product}/update', [\App\Http\Controllers\Admin\ProductsController::class, 'update'])->name('.update'); // admin.products.edit
+        Route::delete('products/{product}/delete', [\App\Http\Controllers\Admin\ProductsController::class, 'destroy'])->name('.delete'); // admin.products.edit
+    });
 
 });
 
