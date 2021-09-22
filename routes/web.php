@@ -27,6 +27,15 @@ Route::get('categories/{category}', [\App\Http\Controllers\CategoriesController:
 // account/orders/5
 Route::namespace('Account')->prefix('account')->name('account')->middleware('auth')->group(function (){
 
+    Route::get('/', [\App\Http\Controllers\Account\UserController::class, 'index'])->name('home'); // account.home
+
+    Route::get('edit', [\App\Http\Controllers\Account\UserController::class, 'edit'])->name('edit'); // account.edit
+
+    Route::get('update', [\App\Http\Controllers\Account\UserController::class, 'update'])->name('update'); // account.update
+
+    Route::get('{user}/show', [\App\Http\Controllers\Account\UserController::class, 'show'])->name('show'); // account.update
+
+
 });
 
 // admin/products/create
