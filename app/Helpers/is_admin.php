@@ -13,6 +13,6 @@ if (!function_exists('is_admin')){
             Config::get('constants.db.roles.admin')
         )->first();
 
-        return auth()->user()->role_id === $adminRole->id;
+        return $user->role_id === $adminRole->id;
     }
 }
