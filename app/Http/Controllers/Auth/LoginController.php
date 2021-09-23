@@ -31,8 +31,8 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
-//        dd(auth()->user()->role->isAdmin());
-        return auth()->user()->role->isAdmin() ? route('admin.home') : $this->redirectTo;
+//        dd(is_admin(auth()->user()));
+        return is_admin(auth()->user()) ? route('admin.home') : $this->redirectTo;
     }
 
     /**

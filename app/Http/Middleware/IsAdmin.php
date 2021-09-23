@@ -18,7 +18,7 @@ class IsAdmin
     {
 //        dd($next, $request, $next($request));
 
-        if(!$request->user()->role->isAdmin()) {
+        if(!is_admin($request->user())) {
             return redirect('/');
         }
 
