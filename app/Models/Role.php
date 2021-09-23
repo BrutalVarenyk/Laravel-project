@@ -23,7 +23,7 @@ class Role extends Model
             'name',
             '=',
             Config::get('constants.db.roles.admin')
-        );
+        )->get()->first();
         //auth()->user()
         //auth - facade's type
         return Auth::user()->role_id === $adminRole->id;
