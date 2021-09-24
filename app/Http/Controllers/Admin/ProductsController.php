@@ -10,7 +10,9 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        return view('admin/products/index');
+        $products = Product::with('category')->paginate(10);
+//        dd($products);
+        return view('admin/products/index', compact('products'));
     }
 
     public function edit(Product $product)
