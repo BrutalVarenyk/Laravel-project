@@ -1,5 +1,10 @@
 @extends('layouts.app')
-
+@if(Auth::user())
+    @php
+        header("Location: " . URL::to('/'), true, 302);
+        exit();
+    @endphp
+@endif
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
