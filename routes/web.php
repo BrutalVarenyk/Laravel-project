@@ -41,7 +41,7 @@ Route::namespace('Account')->prefix('account')->name('account')->middleware('aut
 // admin/products/create
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth', 'admin')->group(function (){
 
-    Route::get('/', [\App\Http\Controllers\Admin\BoardController::class])->name('home'); // admin.home
+    Route::get('/', '\App\Http\Controllers\Admin\BoardController')->name('home'); // admin.home
 
     Route::name('orders')->group(function (){
         Route::get('orders', [\App\Http\Controllers\Admin\OrdersController::class, 'index']); // admin.orders

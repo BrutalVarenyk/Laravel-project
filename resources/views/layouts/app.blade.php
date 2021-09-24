@@ -1,3 +1,4 @@
+@inject('all_categories', 'App\Service\GetAllCategoriesService')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -10,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('public/js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.js" type="text/javascript"></script>
     <script>
         function goBack() {
             window.history.back();
@@ -29,15 +33,25 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <a onclick="goBack()" class="btn btn-default">< Back</a>
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Home
-                </a>
-                <a class="navbar-brand" href="{{ url('products/')  }}">
-                    Products
-                </a>
-                <a class="navbar-brand" href="{{ url('categories/') }}">
-                    Categories
-                </a>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        Home
+                    </a>
+                    <a class="navbar-brand" href="{{ url('products/')  }}">
+                        Products
+                    </a>
+                <div class="dropdown">
+                    <a class="navbar-brand dropdown" href="#"  data-toggle="dropdown" >
+                        Categories
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="{{ url('categories/') }}" class="dropdown-item">All Categories</a>
+                        <div class="dropdown-divider"></div>
+                        @foreach($all_categories::getAllCategories() as $category)
+                            <a href="{{ route('categories.show', $category->id) }}" class="dropdown-item">{{ $category->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
