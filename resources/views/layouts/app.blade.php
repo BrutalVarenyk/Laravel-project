@@ -1,3 +1,4 @@
+@inject('all_categories', 'App\Service\GetAllCategoriesService')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -32,15 +33,25 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <a onclick="goBack()" class="btn btn-default">< Back</a>
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Home
-                </a>
-                <a class="navbar-brand" href="{{ url('products/')  }}">
-                    Products
-                </a>
-                <a class="navbar-brand" href="{{ url('categories/') }}">
-                    Categories
-                </a>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        Home
+                    </a>
+                    <a class="navbar-brand" href="{{ url('products/')  }}">
+                        Products
+                    </a>
+                <div class="dropdown">
+                    <a class="navbar-brand dropdown" href="#"  data-toggle="dropdown" >
+                        Categories
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="{{ url('categories/') }}" class="dropdown-item">All Categories</a>
+                        <div class="dropdown-divider"></div>
+                        @foreach($all_categories::getAllCategories() as $category)
+                            <a href="{{ route('categories.show', $category->id) }}" class="dropdown-item">{{ $category->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
