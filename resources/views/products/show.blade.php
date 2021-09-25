@@ -36,23 +36,23 @@
                 @auth
                     @if($product->in_stock > 0)
                         <hr>
-                        <div>
-                            <p>Add to Cart:</p>
-                            <form action="{{ route('cart.add', $product) }}" method="POST" class="form-inline"></form>
-                        @csrf
-                        @method('post')
-                            <div class="form-group mx-sm-3 nb-2">
-                                <input type="hidden" name="price_with_discount" value="">
-                                <label for="product_count" class="sr-only">Count: </label>
-                                <input type="number"
-                                       class="form-control"
-                                       name="product_count"
-                                       id="product_count"
-                                       min="1"
-                                       max="{{ $product->in_stock }}"
-                                       value="1" >
-                            </div>
-                        </div>
+{{--                        <div>--}}
+{{--                            <p>Add to Cart:</p>--}}
+{{--                            <form action="{{ route('cart.add', $product) }}" method="POST" class="form-inline"></form>--}}
+{{--                        @csrf--}}
+{{--                        @method('post')--}}
+{{--                            <div class="form-group mx-sm-3 nb-2">--}}
+{{--                                <input type="hidden" name="price_with_discount" value="">--}}
+{{--                                <label for="product_count" class="sr-only">Count: </label>--}}
+{{--                                <input type="number"--}}
+{{--                                       class="form-control"--}}
+{{--                                       name="product_count"--}}
+{{--                                       id="product_count"--}}
+{{--                                       min="1"--}}
+{{--                                       max="{{ $product->in_stock }}"--}}
+{{--                                       value="1" >--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     @endif
 {{--                        <form>--}}
 {{--                        @csrf--}}
