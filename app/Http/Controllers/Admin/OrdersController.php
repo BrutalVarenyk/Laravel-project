@@ -10,10 +10,9 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::with(['user', 'status'])
+        $orders = Order::with(['user', 'status', 'products'])
             ->orderByDesc('created_at')
-            ->paginate(10);
-
+            ->paginate(5);
         return view('admin/orders/index', compact('orders'));
     }
 
