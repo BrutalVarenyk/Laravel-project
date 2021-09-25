@@ -14,7 +14,7 @@
             <div class="dropdown-menu">
                 <a href="{{ url('categories/') }}" class="dropdown-item">All Categories</a>
                 <div class="dropdown-divider"></div>
-                @foreach($all_categories::getAllCategories() as $category)
+                @foreach($all_categories as $category)
                     <a href="{{ route('categories.show', $category->id) }}" class="dropdown-item">{{ $category->name }}</a>
                 @endforeach
             </div>
