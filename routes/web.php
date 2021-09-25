@@ -49,10 +49,13 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth', '
     });
 
     Route::name('products')->group(function (){
-        Route::get('products', [\App\Http\Controllers\Admin\ProductsController::class, 'index']); //admin.orders
+        Route::get('products', [\App\Http\Controllers\Admin\ProductsController::class, 'index']); //admin.products
         Route::get('products/{product}/edit', [\App\Http\Controllers\Admin\ProductsController::class, 'edit'])->name('.edit'); // admin.products.edit
         Route::put('products/{product}/update', [\App\Http\Controllers\Admin\ProductsController::class, 'update'])->name('.update'); // admin.products.edit
         Route::delete('products/{product}/delete', [\App\Http\Controllers\Admin\ProductsController::class, 'destroy'])->name('.delete'); // admin.products.edit
+        Route::get('products/new', [\App\Http\Controllers\Admin\ProductsController::class, 'create'])->name('.create'); //admin.products.create
+        Route::post('products', [\App\Http\Controllers\Admin\ProductsController::class, 'store'])->name('.store'); //admin.products.store
+
     });
 
 });
