@@ -2,6 +2,11 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
             <div class="col-md-12">
                 <h3 class="text-center">{{ __('Products') }}</h3>
             </div>
