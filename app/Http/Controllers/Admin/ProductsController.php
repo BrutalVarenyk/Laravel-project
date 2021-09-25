@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -17,21 +19,21 @@ class ProductsController extends Controller
 
     public function edit(Product $product)
     {
-        $category = $product->category()->get();
+        $category = $product->category()->first();
 
-        return view('admin/products/{product}/edit', compact('product', 'category'));
+        return view('admin/products/edit', compact('product', 'category'));
     }
 
-    public function update(Product $product)
+    public function update(UpdateProductRequest $request,Product $product)
     {
-        $product->update();
-        return redirect('admin/products/index');
+        $product->update($request->validated());
+        return redirect('admin/products/');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect('admin/products/index');
+        return redirect('admin/products/')->with('success','Product deleted successfully');;
     }
 
 }
