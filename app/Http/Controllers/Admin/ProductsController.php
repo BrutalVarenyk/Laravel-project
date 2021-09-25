@@ -17,6 +17,27 @@ class ProductsController extends Controller
         return view('admin/products/index', compact('products'));
     }
 
+    public function create()
+    {
+        return view('admin/products/new');
+    }
+
+    public function  store(CreateProductRequest $request)
+    {
+        Product::create([
+            'category_id' => $request->category,
+            'title' => $request->title,
+            'description' => $request->description,
+            'short_description' => $request->short_description,
+            'SKU' => $request->SKU,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'in_stock' => $request->in_stock,
+            'thumbnail' => ''
+        ]);
+        return redirect('admin.products');
+    }
+
     public function edit(Product $product)
     {
         $category = $product->category()->first();
