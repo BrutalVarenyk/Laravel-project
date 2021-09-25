@@ -46,6 +46,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth', '
     Route::name('orders')->group(function (){
         Route::get('orders', [\App\Http\Controllers\Admin\OrdersController::class, 'index']); // admin.orders
         Route::get('orders/{order}/edit', [\App\Http\Controllers\Admin\OrdersController::class, 'edit'])->name('.edit'); // admin.orders.edit
+        Route::get('orders/{order}/show', [\App\Http\Controllers\Admin\OrdersController::class, 'show'])->name('.show'); // admin.orders.show
     });
 
     Route::name('products')->group(function (){
