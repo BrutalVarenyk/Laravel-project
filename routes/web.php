@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/en');
+Route::get('/', function () {
+    return redirect('/en/');
+});
 
-Route::prefix(\App\Service\Localization\LocalizationService::localize())->name('lang.')->group(function(){
+Route::prefix(\App\Service\Localization\LocalizationService::localize())
+    ->name('lang.')->group(function(){
     Auth::routes();
 
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
