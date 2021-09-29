@@ -34,6 +34,22 @@
         {{--            </ul>--}}
         <!-- Left Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item mr-5">
+                    <span class="navbar-text"> {{ __('Language') }}:</span>
+                    <a class="navbar-text"
+                       href="{{ url(preg_replace('/\/[a-z]{2}\//', '/en/', url()->current() . '/', )) }}">
+                        {{ __('en') }}
+                    </a>
+                    <a class="navbar-text"
+                       href="{{ url(preg_replace('/\/[a-z]{2}\//', '/ru/', url()->current() . '/', )) }}">
+                        {{ __('ru') }}
+                    </a>
+                    <a class="navbar-text"
+                       href="{{ url(preg_replace('/\/[a-z]{2}\//', '/ua/', url()->current() . '/', )) }}">
+                        {{ __('ua') }}
+                    </a>
+                </li>
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('lang.login'))
