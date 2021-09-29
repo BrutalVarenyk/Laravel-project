@@ -13,7 +13,10 @@ class CategorylistServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Service\GetAllCategoriesServiceInterface', 'App\Service\GetAllCategoriesService');
+        $this->app->bind(
+            'App\Service\GetAllCategoriesServiceInterface',
+            'App\Service\GetAllCategoriesService'
+        );
     }
 
     /**

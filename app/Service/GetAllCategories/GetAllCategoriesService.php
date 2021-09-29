@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\GetAllCategories;
 
 use App\Models\Category;
 
@@ -10,7 +10,6 @@ class GetAllCategoriesService implements GetAllCategoriesServiceInterface
     public static function getAllCategories()
     {
         $categories = Category::get();
-//        dd($categories);
         return $categories;
     }
 }
