@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@inject('get_all_categories', 'App\Service\GetAllCategoriesService')
+@inject('get_all_categories', 'App\Service\GetAllCategories\GetAllCategoriesService')
 @php($all_categories = $get_all_categories::getAllCategories())
 @section('content')
     <div class="container">
@@ -19,7 +19,8 @@
                 @endif
             </div>
             <div class="col-md-12">
-                <form action="{{ route('admin.products.update', $product) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.products.update', $product) }}" method="POST"
+                      enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group row">
@@ -79,7 +80,8 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="in_stock" class="col-md-4 col-form-label text-md-right">{{ __('In Stock (Quantity)') }}</label>
+                        <label for="in_stock"
+                               class="col-md-4 col-form-label text-md-right">{{ __('In Stock (Quantity)') }}</label>
                         <div class="col-md-6">
                             <input id="in_stock"
                                    type="number"
@@ -93,7 +95,8 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="short_description" class="col-md-4 col-form-label text-md-right">{{ __('Short Description') }}</label>
+                        <label for="short_description"
+                               class="col-md-4 col-form-label text-md-right">{{ __('Short Description') }}</label>
                         <div class="col-md-6">
                             <textarea name="short_description"
                                       id="short_description"
@@ -104,7 +107,8 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                        <label for="description"
+                               class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
                         <div class="col-md-6">
                             <textarea name="description"
                                       id="description"
@@ -115,14 +119,15 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Categories') }}</label>
+                        <label for="categories"
+                               class="col-md-4 col-form-label text-md-right">{{ __('Categories') }}</label>
                         <div class="col-md-6">
                             <select name="categories[]"
                                     id="categories"
                                     class="form-control @error('category') is-invalid @enderror">
                                 @foreach($all_categories as $one_category)
                                     <option value="{{ $one_category->id }}"
-                                    {{ ($category->id == $one_category->id) ? 'selected' : '' }}
+                                        {{ ($category->id == $one_category->id) ? 'selected' : '' }}
                                     >{{ $one_category->name }}</option>
                                 @endforeach
                             </select>
@@ -130,12 +135,14 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>
+                        <label for="categories"
+                               class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-6">
                                     @if(Storage::has($product->thumbnail))
-                                        <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top" style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
+                                        <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"
+                                             style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
                                     @endif
                                 </div>
                                 <div class="col-md-6">
@@ -156,7 +163,8 @@
                                                 <div class="col-sm-12 d-flex justify-content-center align-items-center">
 
                                                 </div>
-                                                <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top" style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
+                                                <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"
+                                                     style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
                                             @endif
                                         @endforeach
                                     </div>

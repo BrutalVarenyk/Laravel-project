@@ -1,6 +1,6 @@
-@inject('get_all_categories', 'App\Service\GetAllCategoriesService')
+@inject('get_all_categories', 'App\Service\GetAllCategories\GetAllCategoriesService')
 @php($all_categories = $get_all_categories::getAllCategories())
-<!doctype html>
+    <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -22,7 +22,8 @@
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.js"
+            type="text/javascript"></script>
     <script>
         function goBack() {
             window.history.back();
@@ -30,28 +31,28 @@
     </script>
 </head>
 <body>
-    <div id="app">
-        @if(!Auth::user())
-            @include('navigation.front-menu')
+<div id="app">
+    @if(!Auth::user())
+        @include('navigation.front-menu')
+    @else
+        @if(is_admin(Auth::user()) && (request()->segment(2) === 'admin'))
+            @include('navigation.admin-menu')
         @else
-            @if(is_admin(Auth::user()) && (Request::is('admin/*') || Request::is('admin')) )
-                @include('navigation.admin-menu')
-            @else
-                @include('navigation.front-menu')
-            @endif
+            @include('navigation.front-menu')
         @endif
-        <main class="py-4">
-            <div class="row">
-                <div class="col-md-12">
-                    @if(session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                </div>
+    @endif
+    <main class="py-4">
+        <div class="row">
+            <div class="col-md-12">
+                @if(session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
             </div>
-        </main>
-        @yield('content')
-    </div>
+        </div>
+    </main>
+    @yield('content')
+</div>
 </body>
 </html>

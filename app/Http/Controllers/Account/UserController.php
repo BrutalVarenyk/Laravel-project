@@ -24,11 +24,11 @@ class UserController extends Controller
 
     public function update()
     {
-        redirect('account/');
+        redirect('lang/account/');
     }
 
     public function show(User $user)
     {
-       view('account/show', compact('user'));
+        view('account/show', compact('user'));
     }
 }

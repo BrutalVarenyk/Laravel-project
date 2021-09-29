@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <h3 class="text-center">{{ __('Category "' . $category->name . '"')  }}</h3>
+                <h3 class="text-center">{{ __('Category') . __(' "' . $category->name . '"')  }}</h3>
                 <hr>
                 <p>{{ $category->description }}</p>
             </div>

@@ -14,14 +14,14 @@
                 <table class="table align-self-center">
                     <thread>
                         <tr>
-                            <th class="text-center" scope="col">ID</th>
-                            <th class="text-center" scope="col">Status</th>
-                            <th class="text-center" scope="col">Name and Surname</th>
-                            <th class="text-center" scope="col">Phone</th>
-                            <th class="text-center" scope="col">Email</th>
-                            <th class="text-center" scope="col">Products</th>
-                            <th class="text-center" scope="col">Total</th>
-                            <th class="text-center" scope="col">Actions</th>
+                            <th class="text-center" scope="col">{{ __('ID') }}</th>
+                            <th class="text-center" scope="col">{{ __('Status') }}</th>
+                            <th class="text-center" scope="col">{{ __('Name and Surname') }}</th>
+                            <th class="text-center" scope="col">{{ __('Phone') }}</th>
+                            <th class="text-center" scope="col">{{ __('Email') }}</th>
+                            <th class="text-center" scope="col">{{ __('Products') }}</th>
+                            <th class="text-center" scope="col">{{ __('Total price') }}</th>
+                            <th class="text-center" scope="col">{{ __('Actions') }}</th>
                         </tr>
                     </thread>
                     <tbody>
@@ -45,8 +45,8 @@
                                 </td>
                                 <td class="text-center" scope="col">{{ $order->total }}</td>
                                 <td class="text-center" scope="col">
-                                    <a href="{{ route('admin.orders.edit', $order->id) }}" class="btn btn-info form-control">Edit</a>
-                                    <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-outline-success form-control">View</a>
+                                    <a href="{{ route('lang.admin.orders.edit', $order->id) }}" class="btn btn-info form-control">{{ __('Edit') }}</a>
+                                    <a href="{{ route('lang.admin.orders.show', $order->id) }}" class="btn btn-outline-success form-control">{{ __('View') }}</a>
                                 </td>
                             </tr>
                         @endforeach
