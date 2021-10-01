@@ -32,7 +32,7 @@ class LoginController extends Controller
     public function redirectPath()
     {
 //        dd(is_admin(auth()->user()));
-        return is_admin(auth()->user()) ? route('admin.home') : $this->redirectTo;
+        return is_admin(auth()->user()) ? route('lang.admin.home') : $this->redirectTo;
     }
 
     /**

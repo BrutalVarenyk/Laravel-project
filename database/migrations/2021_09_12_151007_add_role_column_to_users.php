@@ -21,7 +21,8 @@ class AddRoleColumnToUsers extends Migration
 
                     $table->foreign('role_id')
                         ->references('id')
-                        ->on('roles');
+                        ->on('roles')
+                        ->onDelete('cascade');
                 }
             });
         }
