@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <h3 class="text-center">{{ __('You are admin, great job!') }}</h3>
+                <h3 class="text-center">{{ __('Welcome, :name, nice to see you', ['name' => Auth::user()->name]) }}</h3>
             </div>
         </div>
     </div>

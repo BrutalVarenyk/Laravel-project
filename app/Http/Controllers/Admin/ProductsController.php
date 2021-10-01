@@ -22,7 +22,7 @@ class ProductsController extends Controller
         return view('admin/products/new');
     }
 
-    public function  store(CreateProductRequest $request)
+    public function store(CreateProductRequest $request)
     {
         Product::create([
             'category_id' => $request->category,
@@ -35,7 +35,7 @@ class ProductsController extends Controller
             'in_stock' => $request->in_stock,
             'thumbnail' => ''
         ]);
-        return redirect('admin.products');
+        return redirect('lang/admin/products');
     }
 
     public function edit(Product $product)
@@ -45,16 +45,16 @@ class ProductsController extends Controller
         return view('admin/products/edit', compact('product', 'category'));
     }
 
-    public function update(UpdateProductRequest $request,Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         $product->update($request->validated());
-        return redirect('admin/products/');
+        return redirect('lang/admin/products/');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect('admin/products/')->with('success','Product deleted successfully');;
+        return redirect('lang/admin/products/')->with('success', __('Product deleted successfully'));
     }
 
 }

@@ -82,6 +82,8 @@ return [
 
     'locale' => 'en',
 
+    'languages' => ['en', 'ru', 'ua'],
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -178,7 +180,8 @@ return [
         /*
          * Custom service providers
          */
-        App\Providers\CategorylistServiceProvider::class
+        App\Providers\CategorylistServiceProvider::class,
+        App\Providers\LocalizationServiceProvider::class
 
     ],
 
@@ -233,6 +236,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'LocalizationService' => App\Service\Localization\LocalizationService::class
 
     ],
 

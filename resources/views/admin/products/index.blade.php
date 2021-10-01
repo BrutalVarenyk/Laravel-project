@@ -14,12 +14,12 @@
                 <table class="table align-self-center">
                     <thread>
                         <tr>
-                            <th class="text-center" scope="col">ID</th>
-                            <th class="text-center" scope="col">Thumbnail</th>
-                            <th class="text-center" scope="col">Name</th>
-                            <th class="text-center" scope="col">Quantity</th>
-                            <th class="text-center" scope="col">Category</th>
-                            <th class="text-center" scope="col">Actions</th>
+                            <th class="text-center" scope="col">{{ __('ID') }}</th>
+                            <th class="text-center" scope="col">{{ __('Thumbnail') }}</th>
+                            <th class="text-center" scope="col">{{ __('Name') }}</th>
+                            <th class="text-center" scope="col">{{ __('Quantity') }}</th>
+                            <th class="text-center" scope="col">{{ __('Category') }}</th>
+                            <th class="text-center" scope="col">{{ __('Actions') }}</th>
                         </tr>
                     </thread>
                     <tbody>
@@ -31,13 +31,13 @@
                                 <td class="text-center" scope="col">{{ $product->in_stock }}</td>
                                 <td class="text-center" scope="col">@include('categories.parts.category_view', ['category' => $product->category])</td>
                                 <td class="text-center" scope="col">
-                                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info form-control">Edit</a>
-                                    <form action="{{ route('admin.products.delete', $product->id) }}" method="POST">
+                                    <a href="{{ route('lang.admin.products.edit', $product->id) }}" class="btn btn-info form-control">{{__('Edit')}}</a>
+                                    <form action="{{ route('lang.admin.products.delete', $product->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="submit" class="btn btn-danger form-control" value="Remove">
+                                        <input type="submit" class="btn btn-danger form-control" value="{{__('Remove')}}">
                                     </form>
-                                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-outline-success form-control">View</a>
+                                    <a href="{{ route('lang.products.show', $product->id) }}" class="btn btn-outline-success form-control">{{__('View')}}</a>
                                 </td>
                             </tr>
                         @endforeach

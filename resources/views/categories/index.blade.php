@@ -14,8 +14,8 @@
                                 <table class="table align-self-center">
                                     <thead>
                                     <tr>
-                                        <th class="text-center" scope="col"> Category Name</th>
-                                        <th class="text-center" scope="col"> Products count</th>
+                                        <th class="text-center" scope="col"> {{ __('Category Name') }}</th>
+                                        <th class="text-center" scope="col"> {{ __('Products count') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
