@@ -16,9 +16,9 @@ class CreateProductsTable extends Migration
         if (!Schema::hasTable('products')) {
             Schema::create('products', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+                $table->foreignId('category_id')->constrained('categories');
                 $table->string('title')->unique();
-                $table->string('description');
+                $table->longText('description');
                 $table->string('short_description', 150);
                 $table->string('SKU', 35)->unique();
                 $table->float('price')->startingValue(1);
