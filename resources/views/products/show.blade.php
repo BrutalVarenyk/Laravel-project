@@ -10,9 +10,9 @@
         <hr>
         <div class="row">
             <div class="col-md-6">
-                @if($product->thumbnail)
+                @if(Storage::has($product->thumbnail))
                     {{--                    <img src="{{ $product->thumbnail }}" class="card-img-top" style="max-width: 100%; height: 400px; margin: 0 auto; display: none">--}}
-                    <img src="{{ $product->thumbnail }}" class="card-img-top"
+                    <img src="{{ Storage::url($product->thumbnail) }}" class="card-img-top"
                          style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
                 @endif
             </div>
