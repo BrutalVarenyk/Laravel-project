@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\GetAllCategories;
+namespace App\Services\GetAllCategories;
 
 interface GetAllCategoriesServiceInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Localization;
+namespace App\Services\Localization;
 
 interface LocalizationServiceInterface
 {

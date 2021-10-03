@@ -14,8 +14,8 @@ class CategorylistServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Service\GetAllCategoriesServiceInterface',
-            'App\Service\GetAllCategoriesService'
+            'App\Services\GetAllCategoriesServiceInterface',
+            'App\Services\GetAllCategoriesService'
         );
     }
 

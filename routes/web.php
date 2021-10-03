@@ -19,7 +19,7 @@ Route::get('/', function () {
     return redirect('/en/');
 });
 
-Route::prefix(\App\Service\Localization\LocalizationService::localize())
+Route::prefix(\App\Services\Localization\LocalizationService::localize())
     ->name('lang.')->group(function(){
     Auth::routes();
 
