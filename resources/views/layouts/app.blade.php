@@ -1,4 +1,5 @@
-@inject('get_all_categories', 'App\Service\GetAllCategories\GetAllCategoriesService')
+@inject('get_all_categories', 'App\Services\GetAllCategories\GetAllCategoriesService')
+@inject('get_all_categories', 'App\Services\GetAllCategories\GetAllCategoriesService')
 @php($all_categories = $get_all_categories::getAllCategories())
     <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
