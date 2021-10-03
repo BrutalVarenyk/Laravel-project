@@ -52,15 +52,16 @@ class CreateProductRequest extends FormRequest
     public function rules()
     {
         return [
-//            'category_id',
+            'category' => ['required', 'numeric'],
             'title' => ['required', 'min:5', 'unique:products'],
             'description' => ['required', 'string', 'min:20'],
             'short_description' => ['required', 'string', 'min:20', 'max:150'],
             'SKU'  => ['required', 'min:2', 'unique:products'],
             'price'  => ['required', 'numeric', 'min:1'],
-            'discount' => ['required', 'numeric'],
+            'discount' => ['required', 'numeric', 'max:90'],
             'in_stock' => ['required', 'numeric'],
-//            'thumbnail' => []
+            'thumbnail' => ['required', 'image:jpeg,jpg,png'],
+            'images.*' => ['image:jpeg,jpg,png']
         ];
     }
 }
