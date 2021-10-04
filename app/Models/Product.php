@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Images\ImageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,11 +44,22 @@ class Product extends Model
 
     public function getPrice()
     {
-        if (!is_null($this->discount)){
-            $price = $this->price - ($this->price * ($this->discount / 100));
-            return round($price, 2);
-        }else{
-            return $this->price;
+
+        $price = is_null(is_null($this->discount))
+            ? $this->price
+            : ($this->price - ($this->price * ($this->discount / 100)));
+        $price = round($price, 2);
+
+        return $price < 0 ? 0 : $price;
+    }
+
+    //Mutator
+    public function setThumbnailAttribute($image)
+    {
+        if (!empty($this->attributes['thumbnail'])) {
+            ImageService::remove($this->attributes['thumbnail']);
         }
+
+        $this->attributes['thumbnail'] = ImageService::upload($image);
     }
 }
