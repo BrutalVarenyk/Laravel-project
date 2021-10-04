@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@inject('get_all_categories', 'App\Service\GetAllCategories\GetAllCategoriesService')
+@inject('get_all_categories', 'App\Services\GetAllCategories\GetAllCategoriesService')
 @php($categories = $get_all_categories::getAllCategories())
 @section('content')
     <div class="container">
@@ -29,7 +29,7 @@
                                    type="text"
                                    class="form-control @error('title') is-invalid @enderror"
                                    name="title"
-                                   value=""
+                                   value="{{ old('title') }}"
                                    autocomplete="title"
                                    autofocus
                             >
@@ -43,7 +43,7 @@
                                    type="text"
                                    class="form-control @error('SKU') is-invalid @enderror"
                                    name="SKU"
-                                   value=""
+                                   value="{{ old('SKU') }}"
                                    autocomplete="SKU"
                                    autofocus
                             >
@@ -57,7 +57,7 @@
                                    type="text"
                                    class="form-control @error('price') is-invalid @enderror"
                                    name="price"
-                                   value=""
+                                   value="{{ old('price') }}"
                                    autocomplete="price"
                                    autofocus
                             >
@@ -71,7 +71,7 @@
                                    type="text"
                                    class="form-control @error('description') is-invalid @enderror"
                                    name="discount"
-                                   value="0"
+                                   value="{{ old('discount') ? old('discount') : 0 }}"
                                    autocomplete="discount"
                                    autofocus
                             >
@@ -86,7 +86,7 @@
                                    type="number"
                                    class="form-control @error('in_stock') is-invalid @enderror"
                                    name="in_stock"
-                                   value=""
+                                   value="{{ old('in_stock') }}"
                                    autocomplete="in_stock"
                                    autofocus
                             >
@@ -131,44 +131,40 @@
                         </div>
                     </div>
 
-                    {{--                    <div class="form-group row">--}}
-                    {{--                        <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>--}}
-                    {{--                        <div class="col-md-6">--}}
-                    {{--                            <div class="row">--}}
-                    {{--                                <div class="col-md-6">--}}
-                    {{--                                    @if(Storage::has($product->thumbnail))--}}
-                    {{--                                        <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top" style="max-width: 100%; height: 400px; margin: 0 auto; display: block">--}}
-                    {{--                                    @endif--}}
-                    {{--                                </div>--}}
-                    {{--                                <div class="col-md-6">--}}
-                    {{--                                    <input type="file" name="thumbnail" id="thumbnail">--}}
-                    {{--                                </div>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
+                    <div class="form-group row">
+                        <label for="categories"
+                               class="col-md-4 col-form-label text-md-right">{{ __('Thumbnail') }}</label>
+                        <div class="col-md-6">
+                            <div class="row">
+                                {{--                                <div class="col-md-6">--}}
+                                {{--                                    @if(Storage::has($product->thumbnail))--}}
+                                {{--                                        <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"--}}
+                                {{--                                             style="max-width: 100%; height: 400px; margin: 0 auto; display: block">--}}
+                                {{--                                    @endif--}}
+                                {{--                                </div>--}}
+                                <div class="col-md-6">
+                                    <img src="" id="thumbnail-preview" style="max-height: 250px; max-width: 250px">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="thumbnail" id="thumbnail">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    {{--                    <div class="form-group row">--}}
-                    {{--                        <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>--}}
-                    {{--                        <div class="col-md-6">--}}
-                    {{--                            <div class="row">--}}
-                    {{--                                <div class="col-md-12">--}}
-                    {{--                                    <div class="row">--}}
-                    {{--                                        @foreach($product->gallery()->get() as $image)--}}
-                    {{--                                            @if(Storage::has($image->path))--}}
-                    {{--                                                <div class="col-sm-12 d-flex justify-content-center align-items-center">--}}
-
-                    {{--                                                </div>--}}
-                    {{--                                                <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top" style="max-width: 100%; height: 400px; margin: 0 auto; display: block">--}}
-                    {{--                                            @endif--}}
-                    {{--                                        @endforeach--}}
-                    {{--                                    </div>--}}
-                    {{--                                </div>--}}
-                    {{--                                <div class="col-md-6">--}}
-                    {{--                                    <input type="file" name="images[]" id="images">--}}
-                    {{--                                </div>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
+                    <div class="form-group row">
+                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row images-wrapper d-flex justify-content-center align-items-center"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" name="images" id="images" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <div class="col-md-10 text-right">
@@ -179,5 +175,56 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.google"></script>
+
+    {{--    <div class="col-sm-12 d-flex justify-content-center align-items-center">--}}
+    {{--        <img src="" class="card-img-top" style="max-width: 80%; margin: 0 auto; display: block">--}}
+    {{--        <a data-image_id="{{ $image->id }}"--}}
+    {{--           data-route="{{'ajax.lang.products.images.delete'}}"--}}
+    {{--        >x</a>--}}
+
+    {{--    </div>--}}
+
+
+    {{--    <script src="https://ajax.google"></script>--}}
+    {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>--}}
+    {{--    <script src="{{ asset('public/js/product-images.js') }}"></script>--}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+
+            //for preview of images load multiple
+            if (window.FileReader) {
+                document.getElementById("images").onchange = function () {
+                    let counter = -1,
+                        file;
+
+                    $('.images-wrapper').html('');
+
+                    let template = `<div class="col-sm-12 d-flex justify-content-center align-items-center">
+                                        <img src="__url__" class="card-img-top" style="max-height: 60%; margin: 0 auto; display: block">
+                                 </div>`;
+
+                    while (file = this.files[++counter]) {
+                        let reader = new FileReader();
+
+                        reader.onloadend = (function () {
+                            let img = template.replace('__url__', this.result);
+                            $('.images-wrapper').append(img);
+                        });
+                        reader.readAsDataURL(file);
+                    }
+                }
+            }
+
+            // for preview thumbnail
+            $('#thumbnail').change(function () {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('#thumbnail-preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+        });
+    </script>
 @endsection
