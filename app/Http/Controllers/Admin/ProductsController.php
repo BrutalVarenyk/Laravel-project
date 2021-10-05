@@ -7,6 +7,7 @@ use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\Images\ProductImagesService;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -14,7 +15,6 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::with('category')->paginate(10);
-//        dd($products);
         return view('admin/products/index', compact('products'));
     }
 
@@ -30,10 +30,9 @@ class ProductsController extends Controller
         $category = Category::find($fields['category']);
 
         $images = !empty($fields['images']) ? $fields['images'] : [];
-        unset($fields['images']);
-        unset($fields['category']);
-
         $product = $category->products()->create($fields);
+
+        ProductImagesService::attach($product, $images);
 
         return redirect()->route('lang.admin.products');
     }
@@ -53,7 +52,7 @@ class ProductsController extends Controller
 
     public function destroy(Product $product)
     {
-        $product->delete();
+//        $product->delete();
         return redirect('lang/admin/products/')->with('success', __('Product deleted successfully'));
     }
 
