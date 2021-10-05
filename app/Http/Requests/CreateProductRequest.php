@@ -60,8 +60,8 @@ class CreateProductRequest extends FormRequest
             'price'  => ['required', 'numeric', 'min:1'],
             'discount' => ['required', 'numeric', 'max:90'],
             'in_stock' => ['required', 'numeric'],
-            'thumbnail' => ['required', 'image:jpeg,jpg,png'],
-            'images.*' => ['image:jpeg,jpg,png']
+            'thumbnail' => ['required', 'mimes:jpeg,jpg,png'],
+            'images.*' => ['mimes:jpeg,jpg,png']
         ];
     }
 }

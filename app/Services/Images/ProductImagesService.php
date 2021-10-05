@@ -11,7 +11,7 @@ class ProductImagesService implements ProductImagesServiceInterface
 
     public static function attach(Product $product, array $images = [])
     {
-        if (!empty($image)) {
+        if (!empty($images)) {
             foreach ($images as $image) {
                 $path = ImageService::upload($image);
                 $newImage = ProductImage::create(['path' => $path]);

@@ -160,7 +160,7 @@
                                     <div class="row images-wrapper d-flex justify-content-center align-items-center"></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="file" name="images" id="images" multiple>
+                                    <input type="file" name="images[]" id="images" multiple>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
 
                     <div class="form-group row">
                         <div class="col-md-10 text-right">
-                            <input type="submit" class="btn btn-info" value="Update Product">
+                            <input type="submit" class="btn btn-info" value="{{ __('Create Product') }}">
                         </div>
                     </div>
                 </form>
