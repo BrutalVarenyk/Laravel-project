@@ -183,6 +183,7 @@ return [
         App\Providers\CategorylistServiceProvider::class,
         App\Providers\LocalizationServiceProvider::class,
         App\Providers\ImageServiceProvider::class,
+        App\Providers\ProductImagesServiceProvider::class,
 
     ],
 
