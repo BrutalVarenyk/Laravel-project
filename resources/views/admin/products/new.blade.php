@@ -101,7 +101,7 @@
                                       id="short_description"
                                       class="form-control @error('short_description') is-invalid @enderror"
                                       cols="30"
-                                      rows="10"></textarea>
+                                      rows="10">{{ old('short_description') }}</textarea>
                         </div>
                     </div>
 
@@ -113,7 +113,7 @@
                                       id="description"
                                       class="form-control @error('description') is-invalid @enderror"
                                       cols="30"
-                                      rows="10"></textarea>
+                                      rows="10">{{ old('description') }}</textarea>
                         </div>
                     </div>
 
