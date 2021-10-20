@@ -26,7 +26,7 @@
                         @foreach($products as $product)
                             <tr>
                                 <td class="text-center" scope="col">{{ $product->id }}</td>
-                                <td class="text-center" scope="col"><img src="{{ $product->thumbnail }}" width="90" alt="{{ $product->title }}"></td>
+                                <td class="text-center" scope="col"><img src="{{ Storage::url($product->thumbnail) }}" width="90" alt="{{ $product->title }}"></td>
                                 <td class="text-center" scope="col">{{ $product->title }}</td>
                                 <td class="text-center" scope="col">{{ $product->in_stock }}</td>
                                 <td class="text-center" scope="col">@include('categories.parts.category_view', ['category' => $product->category])</td>

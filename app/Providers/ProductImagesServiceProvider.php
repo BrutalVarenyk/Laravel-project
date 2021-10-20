@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
-class CategorylistServiceProvider extends ServiceProvider
+class ProductImagesServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -14,9 +15,8 @@ class CategorylistServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Services\GetAllCategoriesServiceInterface',
-            'App\Services\GetAllCategoriesService'
-        );
+            \App\Services\Images\ProductImagesServiceInterface::class,
+            \App\Services\Images\ProductImagesService::class);
     }
 
     /**

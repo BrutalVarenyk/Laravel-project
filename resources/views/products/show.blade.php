@@ -10,11 +10,21 @@
         <hr>
         <div class="row">
             <div class="col-md-6">
-                @if($product->thumbnail)
+                @if(Storage::has($product->thumbnail))
                     {{--                    <img src="{{ $product->thumbnail }}" class="card-img-top" style="max-width: 100%; height: 400px; margin: 0 auto; display: none">--}}
-                    <img src="{{ $product->thumbnail }}" class="card-img-top"
-                         style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
+                    <img src="{{ Storage::url($product->thumbnail) }}" class="card-img-top"
+                         style="max-width: 100%; height: 400px; width: auto; margin: 0 auto; display: block">
                 @endif
+
+{{-- For testing of images--}}
+{{--                    @foreach($product->gallery()->get() as $image)--}}
+{{--                        @if(Storage::has($image->path))--}}
+{{--                                                <img src="{{ $product->thumbnail }}" class="card-img-top" style="max-width: 100%; height: 400px; margin: 0 auto; display: none">--}}
+{{--                            <img src="{{ Storage::url($image->path) }}" class="card-img-top"--}}
+{{--                                 style="max-width: 100%; height: 400px; margin: 0 auto; display: block">--}}
+{{--                        @endif--}}
+{{--                    @endforeach--}}
+
             </div>
 
             <div class="col-md-6">

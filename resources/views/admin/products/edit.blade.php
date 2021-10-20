@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@inject('get_all_categories', 'App\Service\GetAllCategories\GetAllCategoriesService')
+@inject('get_all_categories', 'App\Services\GetAllCategories\GetAllCategoriesService')
 @php($all_categories = $get_all_categories::getAllCategories())
 @section('content')
     <div class="container">
@@ -19,7 +19,7 @@
                 @endif
             </div>
             <div class="col-md-12">
-                <form action="{{ route('admin.products.update', $product) }}" method="POST"
+                <form action="{{ route('lang.admin.products.update', $product) }}" method="POST"
                       enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -161,10 +161,11 @@
                                         @foreach($product->gallery()->get() as $image)
                                             @if(Storage::has($image->path))
                                                 <div class="col-sm-12 d-flex justify-content-center align-items-center">
-
+                                                    <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"
+                                                         style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
                                                 </div>
-                                                <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"
-                                                     style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
+{{--                                                <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"--}}
+{{--                                                     style="max-width: 100%; height: 400px; margin: 0 auto; display: block">--}}
                                             @endif
                                         @endforeach
                                     </div>

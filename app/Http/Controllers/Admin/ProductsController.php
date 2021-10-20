@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Category;
 use App\Models\Product;
+use App\Services\Images\ImageService;
+use App\Services\Images\ProductImagesService;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -13,7 +16,6 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::with('category')->paginate(10);
-//        dd($products);
         return view('admin/products/index', compact('products'));
     }
 
@@ -24,18 +26,16 @@ class ProductsController extends Controller
 
     public function store(CreateProductRequest $request)
     {
-        Product::create([
-            'category_id' => $request->category,
-            'title' => $request->title,
-            'description' => $request->description,
-            'short_description' => $request->short_description,
-            'SKU' => $request->SKU,
-            'price' => $request->price,
-            'discount' => $request->discount,
-            'in_stock' => $request->in_stock,
-            'thumbnail' => ''
-        ]);
-        return redirect('lang/admin/products');
+        $fields = $request->validated();
+
+        $category = Category::find($fields['category']);
+
+        $images = !empty($fields['images']) ? $request->file('images') : [];
+        $product = $category->products()->create($fields);
+
+        ProductImagesService::attach($product, $images);
+
+        return redirect()->route('lang.admin.products');
     }
 
     public function edit(Product $product)
@@ -53,8 +53,9 @@ class ProductsController extends Controller
 
     public function destroy(Product $product)
     {
-        $product->delete();
-        return redirect('lang/admin/products/')->with('success', __('Product deleted successfully'));
+          ImageService::remove($product->thumbnail);
+          dd($product->thumbnail);
+        return redirect()->route('lang.admin.products')->with('success', __('Product deleted successfully'));
     }
 
 }
