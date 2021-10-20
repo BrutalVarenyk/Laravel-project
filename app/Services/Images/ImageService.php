@@ -16,27 +16,21 @@ class ImageService implements ImageServiceInterface
             return '';
         }
 
-        if ($is_string = is_string($image)) {
-            $imageData = explode('.', $image );
+        if (is_string($image)) {
+            return str_replace('public/storage', '', $image);
         }
 
-        // create path with random 3 directory and random name of image file
+        if($is_string = is_string($image)) {
+            $imageData = explode('.', $image);
+        }
+
         $imagePath = 'public/' . implode('/', str_split(Str::random(8), 2))
             . '/'
             . Str::random(16)
             . '.'
             . (!$is_string ? $image->getClientOriginalExtension() : $imageData[1]);
 
-        // save image with our random unique path
-//        Storage::put(
-//            $imagePath,
-//            Storage::url($image)
-//        );
-
-        Storage::put(
-            $imagePath,
-            File::get($image)
-        );
+        Storage::put($imagePath, File::get($image));
 
         return $imagePath;
     }
