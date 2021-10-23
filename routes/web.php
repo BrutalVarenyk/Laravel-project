@@ -79,8 +79,21 @@ Route::prefix(\App\Services\Localization\LocalizationService::localize())
                 ->name('.create'); // lang.admin.products.create
             Route::post('products', [\App\Http\Controllers\Admin\ProductsController::class, 'store'])
                 ->name('.store'); // lang.admin.products.store
+            });
 
-        });
+            Route::name('categories')->group(function (){
+                Route::get('categories/{category}/edit', [\App\Http\Controllers\Admin\CategoriesController::class, 'edit'])
+                    ->name('.edit'); // lang.admin.products.edit
+                Route::put('categories/{category}/update', [\App\Http\Controllers\Admin\CategoriesController::class, 'update'])
+                    ->name('.update'); // lang.admin.products.edit
+                Route::delete('categories/{category}/delete', [\App\Http\Controllers\Admin\CategoriesController::class, 'destroy'])
+                    ->name('.delete'); // lang.admin.products.edit
+                Route::get('categories/new', [\App\Http\Controllers\Admin\CategoriesController::class, 'create'])
+                    ->name('.create'); // lang.admin.products.create
+                Route::post('categories', [\App\Http\Controllers\Admin\CategoriesController::class, 'store'])
+                    ->name('.store'); // lang.admin.products.store
+
+            });
 
     });
 });
