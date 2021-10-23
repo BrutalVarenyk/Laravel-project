@@ -48,14 +48,19 @@ class ProductsController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $product->update($request->validated());
-        return redirect('lang/admin/products/');
+        return redirect()->route('lang.admin.products');
     }
 
     public function destroy(Product $product)
     {
-          ImageService::remove($product->thumbnail);
-          dd($product->thumbnail);
-        return redirect()->route('lang.admin.products')->with('success', __('Product deleted successfully'));
+        ImageService::remove($product->thumbnail);
+        $product->orders()->detach();
+        $images = $product->gallery()->get();
+        if ($images->count() > 0) {
+            foreach ($images as $image) ImageService::remove($image->path);
+        }
+        $product->delete();
+        return redirect()->route('lang.admin.products')->with('status', __('Product deleted successfully'));
     }
 
 }
