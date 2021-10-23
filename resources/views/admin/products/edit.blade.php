@@ -161,7 +161,7 @@
                                         @foreach($product->gallery()->get() as $image)
                                             @if(Storage::has($image->path))
                                                 <div class="col-sm-12 d-flex justify-content-center align-items-center">
-                                                    <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"
+                                                    <img src="{{Storage::url($image->path)}}" class="card-img-top"
                                                          style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
                                                 </div>
 {{--                                                <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"--}}
