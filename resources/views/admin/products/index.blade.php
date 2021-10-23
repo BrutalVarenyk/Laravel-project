@@ -29,7 +29,13 @@
                                 <td class="text-center" scope="col"><img src="{{ Storage::url($product->thumbnail) }}" width="90" alt="{{ $product->title }}"></td>
                                 <td class="text-center" scope="col">{{ $product->title }}</td>
                                 <td class="text-center" scope="col">{{ $product->in_stock }}</td>
-                                <td class="text-center" scope="col">@include('categories.parts.category_view', ['category' => $product->category])</td>
+                                <td class="text-center" scope="col">
+                                    @if(!empty($product->category))
+                                        @include('categories.parts.category_view', ['category' => $product->category])
+                                    @else
+                                        {{ __('Missing category') }}
+                                    @endif
+                                </td>
                                 <td class="text-center" scope="col">
                                     <a href="{{ route('lang.admin.products.edit', $product->id) }}" class="btn btn-info form-control">{{__('Edit')}}</a>
                                     <form action="{{ route('lang.admin.products.delete', $product->id) }}" method="POST">
