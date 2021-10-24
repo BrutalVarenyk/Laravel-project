@@ -54,7 +54,7 @@ class UpdateProductRequest extends FormRequest
         $productId = $this->route('product')->id;
 
         return [
-//            'category_id' => ['required', 'numeric'],
+            'category_id' => ['required', 'numeric'],
             'title' => ['required', 'min:5', Rule::unique('products', 'title')->ignore($productId)],
             'description' => ['required', 'string', 'min:20'],
             'short_description' => ['required', 'string', 'min:20', 'max:150'],
@@ -62,7 +62,8 @@ class UpdateProductRequest extends FormRequest
             'price'  => ['required', 'numeric', 'min:1'],
             'discount' => ['required', 'numeric'],
             'in_stock' => ['required', 'numeric'],
-//            'thumbnail' => []
+            'thumbnail' => ['mimes:jpeg,jpg,png'],
+            'images.*' => ['mimes:jpeg,jpg,png']
         ];
     }
 }

@@ -122,13 +122,16 @@
                         <label for="categories"
                                class="col-md-4 col-form-label text-md-right">{{ __('Categories') }}</label>
                         <div class="col-md-6">
-                            <select name="categories[]"
+                            <select name="category_id"
                                     id="categories"
                                     class="form-control @error('category') is-invalid @enderror">
                                 @foreach($all_categories as $one_category)
                                     <option value="{{ $one_category->id }}"
-                                        {{ ($category->id == $one_category->id) ? 'selected' : '' }}
-                                    >{{ $one_category->name }}</option>
+                                        {{ (!empty($product->category()->first()))
+                                        ? (($product->category()->first()->id == $one_category->id) ? 'selected' : '' )
+                                        : ''
+                                        }}
+                                        >{{ $one_category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -153,25 +156,28 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
+                        <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Images') }}</label>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
                                         @foreach($product->gallery()->get() as $image)
                                             @if(Storage::has($image->path))
-                                                <div class="col-sm-12 d-flex justify-content-center align-items-center">
-                                                    <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"
-                                                         style="max-width: 100%; height: 400px; margin: 0 auto; display: block">
+                                                <div class="col-sm-12 d-flex justify-content-lg-start  align-items-center">
+                                                    <img src="{{Storage::url($image->path)}}" class="card-img-top float-left"
+                                                         style="max-width: 100%; width: auto; height: 400px; margin: 0 auto; display: block" >
+                                                    <a  data-image_id="{{ $image->id }}"
+                                                        data-route="{{ route('ajax.products.images.delete', $image->id) }}"
+                                                        class="btn btn-danger remove-product-image">x</a>
                                                 </div>
-{{--                                                <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"--}}
-{{--                                                     style="max-width: 100%; height: 400px; margin: 0 auto; display: block">--}}
+                                                {{--                                                <img src="{{Storage::url($product->thumbnail)}}" class="card-img-top"--}}
+                                                {{--                                                     style="max-width: 100%; height: 400px; margin: 0 auto; display: block">--}}
                                             @endif
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="file" name="images[]" id="images">
+                                    <input type="file" name="images[]" id="images" multiple>
                                 </div>
                             </div>
                         </div>
@@ -186,4 +192,7 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="{{ asset('js/product-images.js') }}" type="text/javascript"></script>
 @endsection
