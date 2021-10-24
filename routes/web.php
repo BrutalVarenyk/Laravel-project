@@ -41,13 +41,10 @@ Route::prefix(\App\Services\Localization\LocalizationService::localize())
 
         Route::get('/', [\App\Http\Controllers\Account\UserController::class, 'index'])
             ->name('home'); // lang.account.home
-
         Route::get('edit', [\App\Http\Controllers\Account\UserController::class, 'edit'])
             ->name('edit'); // lang.account.edit
-
         Route::get('update', [\App\Http\Controllers\Account\UserController::class, 'update'])
             ->name('update'); // lang.account.update
-
         Route::get('{user}/show', [\App\Http\Controllers\Account\UserController::class, 'show'])
             ->name('show'); // lang.account.update
 
@@ -97,4 +94,7 @@ Route::prefix(\App\Services\Localization\LocalizationService::localize())
 
     });
 });
+
+Route::delete('ajax/productImage/{image_id}', [\App\Http\Controllers\ProductImageController::class, 'destroy'])
+    ->name('ajax.products.images.delete');
 
