@@ -47,7 +47,10 @@ class ProductsController extends Controller
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->validated());
+        $validated = $request->validated();
+        $product->update($validated);
+        if (!empty($validated['images']))
+        ProductImagesService::attach($product, $validated['images']);
         return redirect()->route('lang.admin.products');
     }
 
