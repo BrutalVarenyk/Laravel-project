@@ -12,7 +12,7 @@
                     </a>
                     <div class="dropdown-menu">
                         <a href="{{ route('lang.categories') }}" class="dropdown-item">{{__('All Categories')}}</a>
-                        <a href="{{ route('lang.admin.categories.create') }}" class="dropdown-item">{{__('Create Category')}}</a>
+                        <a href="{{ route('lang.admin.categories.create') }}" class="dropdown-item">{{__('New Category')}}</a>
                         <div class="dropdown-divider"></div>
                         @foreach($all_categories as $category)
                             <a href="{{ route('lang.categories.show', $category->id) }}"
