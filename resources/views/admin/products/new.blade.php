@@ -69,7 +69,7 @@
                         <div class="col-md-6">
                             <input id="discount"
                                    type="text"
-                                   class="form-control @error('description') is-invalid @enderror"
+                                   class="form-control @error('discount') is-invalid @enderror"
                                    name="discount"
                                    value="{{ old('discount') ? old('discount') : 0 }}"
                                    autocomplete="discount"
