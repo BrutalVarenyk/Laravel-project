@@ -14,7 +14,7 @@
     <td>{{ $row->price }}$</td>
     <td>{{ $row->subtotal }}$</td>
     <td>
-        <form action="{{ route('lang.cart.delete') }}" method="POST">
+        <form action="{{ route('lang.cart.delete', $row->id) }}" method="POST">
             @csrf
             <input type="hidden" value="{{ $row->rowId }}" name="rowId">
             <input type="submit" class="btn btn-outline-danger" value="{{ __('Delete') }}">
