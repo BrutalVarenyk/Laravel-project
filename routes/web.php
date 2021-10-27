@@ -93,6 +93,16 @@ Route::prefix(\App\Services\Localization\LocalizationService::localize())
             });
 
     });
+
+    Route::middleware('auth')->group(function () {
+        Route::get('cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart');
+        Route::post('cart/{product}/add', [\App\Http\Controllers\CartController::class, 'add'])
+            ->name('cart.add');
+        Route::post('cart/product/delete', [\App\Http\Controllers\CartController::class, 'delete'])
+            ->name('cart.delete');
+        Route::post('cart/{product}/count/update', [\App\Http\Controllers\CartController::class, 'countUpdate'])
+            ->name('cart.count.update');
+    });
 });
 
 Route::delete('ajax/productImage/{image_id}', [\App\Http\Controllers\ProductImageController::class, 'destroy'])
