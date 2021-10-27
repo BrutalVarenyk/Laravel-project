@@ -32,7 +32,7 @@ class CartController extends Controller
 
     public function delete(Request $request, Product $product)
     {
-        CartQuantityService::returnQuantity($request->rowId, $product);
+        CartQuantityService::refreshQuantity($request->rowId, $product);
 
         Cart::instance('cart')->remove($request->rowId);
         return redirect()->back()->with(['status' => 'Product was successfully removed from cart']);
@@ -46,14 +46,14 @@ class CartController extends Controller
                 ->with(["status" => "The product {$product->title} has only {$product->in_stock} items"]);
         }
 
-        CartQuantityService::returnQuantity($request->rowId, $product);
+        CartQuantityService::refreshQuantity($request->rowId, $product);
 
         Cart::instance('cart')->update(
           $request->rowId,
           $request->product_count
         );
 
-        CartQuantityService::takeQuantity($request->rowId, $product);
+        CartQuantityService::refreshQuantity($request->rowId, $product, false);
 
         return redirect()->back();
     }

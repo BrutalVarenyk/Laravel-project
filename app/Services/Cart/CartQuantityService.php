@@ -8,15 +8,11 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class CartQuantityService implements CartQuantityServiceInterface
 {
 
-    public static function returnQuantity(string $rowId, Product $product)
+    public static function refreshQuantity(string $rowId, Product $product, bool $option = true)
     {
         $row = Cart::instance('cart')->get($rowId);
-        $product->update(['in_stock' => ($product->in_stock + $row->qty)]);
-    }
-
-    public static function takeQuantity(string $rowId, Product $product)
-    {
-        $row = Cart::instance('cart')->get($rowId);
-        $product->update(['in_stock' => ($product->in_stock - $row->qty)]);
+        $product->update([
+            'in_stock' => ($option === true) ? ($product->in_stock + $row->qty) : ($product->in_stock - $row->qty)
+        ]);
     }
 }

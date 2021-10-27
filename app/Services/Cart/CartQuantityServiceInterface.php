@@ -9,9 +9,10 @@ interface CartQuantityServiceInterface
     /**
      * @param string $rowId
      * @param Product $product
+     * @param int $option
      * @return mixed
      *
-     * Return quantity from cart to product
+     * Refresh quantity of product due to changing of qty in cart
      */
-    public static function returnQuantity(string $rowId, Product $product);
+    public static function refreshQuantity(string $rowId, Product $product, bool $option = true);
 }
