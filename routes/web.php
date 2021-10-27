@@ -98,7 +98,7 @@ Route::prefix(\App\Services\Localization\LocalizationService::localize())
         Route::get('cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart');
         Route::post('cart/{product}/add', [\App\Http\Controllers\CartController::class, 'add'])
             ->name('cart.add');
-        Route::post('cart/product/delete', [\App\Http\Controllers\CartController::class, 'delete'])
+        Route::post('cart/{product}/delete', [\App\Http\Controllers\CartController::class, 'delete'])
             ->name('cart.delete');
         Route::post('cart/{product}/count/update', [\App\Http\Controllers\CartController::class, 'countUpdate'])
             ->name('cart.count.update');
