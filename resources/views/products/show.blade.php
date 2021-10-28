@@ -42,7 +42,7 @@
                 <p>In stock: {{ $product->in_stock }}</p>
                 <hr>
                 <div>
-                    <p>Product Categories: </p>
+                    <p>{{__('Product Categories')}}: </p>
                     @each('categories/parts/category_view', $product->category()->get(), 'category')
                 </div>
                 @auth
@@ -65,7 +65,7 @@
                                            value="1"
                                     >
                                 </div>
-                                <button type="submit" class="btn btn-primary mb-2">Buy</button>
+                                <button type="submit" class="btn btn-primary mb-2">{{ __('Buy') }}</button>
                             </form>
                         </div>
                     @endif
