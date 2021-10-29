@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function instanceCartName()
+    {
+        $userName = [
+          $this->id,
+          $this->surname
+        ];
+
+        return implode('_', $userName);
+    }
 }
