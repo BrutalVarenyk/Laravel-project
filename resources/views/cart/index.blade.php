@@ -28,7 +28,7 @@
                     <h3 class="text-center">There are no products in cart</h3>
                 @endif
                 <hr>
-                <table class="table table-dark" style="width: 50%; float: right;">
+                <table class="table table-dark" style="width: 50%; float: right; ">
                     <tbody>
                     <tr>
                         <td colspan="2">&nbsp</td>
@@ -49,8 +49,17 @@
                 </table>
             </div>
             <div class="col-md-12 text-right">
-{{--                <a href="{{ route('checkout') }}" class="btn btn-outline-success">{{ __('Proceed to checkout') }}</a>--}}
+                <a href="{{ route('lang.checkout') }}" class="btn btn-outline-success">{{ __('Proceed to checkout') }}</a>
             </div>
         </div>
     </div>
+    <style>
+        td
+        {
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
 @endsection
