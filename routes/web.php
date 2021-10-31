@@ -102,6 +102,12 @@ Route::prefix(\App\Services\Localization\LocalizationService::localize())
             ->name('cart.delete');
         Route::post('cart/{product}/count/update', [\App\Http\Controllers\CartController::class, 'countUpdate'])
             ->name('cart.count.update');
+
+        Route::get('checkout', [\App\Http\Controllers\CheckoutController::class, 'index'])
+            ->name('checkout');
+
+        Route::post('order', [\App\Http\Controllers\OrdersController::class, 'store'])
+            ->name('order.create');
     });
 });
 
