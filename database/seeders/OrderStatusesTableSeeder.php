@@ -6,7 +6,7 @@ use App\Models\OrderStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
 
-class OrderStasusesTableSeeder extends Seeder
+class OrderStatusesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
