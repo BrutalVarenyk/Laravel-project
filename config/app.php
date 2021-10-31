@@ -184,8 +184,12 @@ return [
         App\Providers\LocalizationServiceProvider::class,
         App\Providers\ImageServiceProvider::class,
         App\Providers\ProductImagesServiceProvider::class,
-        App\Providers\CartQuantityServiceProvider::class
+        App\Providers\CartQuantityServiceProvider::class,
 
+        /*
+         * Repository service providers
+         */
+        \App\Providers\OrderRepositoryServiceProvider::class
 
     ],
 
