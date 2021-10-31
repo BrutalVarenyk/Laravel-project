@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
                 $table->foreignId('user_id')->constrained('users')->onDelete('no action');
                 $table->string('name', 35);
                 $table->string('surname', 50);
-                $table->string('phone', 15);
+                $table->string('phone', 18);
                 $table->string('email');
                 $table->string('country', 50);
                 $table->string('city', 50);
