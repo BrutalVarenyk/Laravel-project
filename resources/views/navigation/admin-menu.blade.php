@@ -83,6 +83,9 @@
                             {{ __('Admin') }}
                         </a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('lang.account.main') }}">
+                            {{ __('Profile') }}
+                        </a>
                         <a class="dropdown-item" href="{{ route('lang.logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

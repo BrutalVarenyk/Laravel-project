@@ -14,6 +14,7 @@ class OrderRepository implements  OrderRepositoryInterface
 
     public function create(Request $request): Order
     {
+//        dd($request, $request->validated());
         $status = OrderStatus::where('name', '=', Config::get('constants.db.order_statuses.in_process'))->first();
 //        dd($status);
         $orderData = $request->validated();

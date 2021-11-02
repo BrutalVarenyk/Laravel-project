@@ -3,32 +3,34 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccountUpdateRequest;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Exception;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        view('account/index', compact('user'));
+        $user = User::with('role')->find(auth()->user()->id)->first();
+        return view('account/index', compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit()
     {
-        $user = Auth::user();
-        view('account/edit', compact('user'));
+        $user = auth()->user();
+        return view('account/users/edit', compact('user'));
     }
 
-    public function update()
+    public function update(AccountUpdateRequest $request)
     {
-        redirect('lang/account/');
+        $user = auth()->user();
+        if ($user->update($request->validated())){
+            return redirect()->back()->with(['status' => 'Profile has been updated']);
+        }
+        return redirect()->back()->with(['status' => 'Oops... something go wrong =(']);
     }
 
-    public function show(User $user)
-    {
-        view('account/show', compact('user'));
-    }
 }
