@@ -167,6 +167,7 @@ return [
         /*
          * Package Services Providers...
          */
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Services Providers...
@@ -185,11 +186,12 @@ return [
         App\Providers\ImageServiceProvider::class,
         App\Providers\ProductImagesServiceProvider::class,
         App\Providers\CartQuantityServiceProvider::class,
+        App\Providers\WishlistServiceProvider::class,
 
         /*
          * Repository service providers
          */
-        \App\Providers\OrderRepositoryServiceProvider::class
+        App\Providers\OrderRepositoryServiceProvider::class,
 
     ],
 
