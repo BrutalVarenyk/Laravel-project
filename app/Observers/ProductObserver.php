@@ -18,7 +18,20 @@ class ProductObserver
      */
     public function created(Product $product)
     {
-        //
+        logs()->info('INIT:Notify');
+        $followers = $product->followers()
+            ->get()
+            ->each
+            ->notify(new ProductAppearedNotification());
+        logs()->info('END:Notify');
+        // Notification of product appearance for product followers
+//        if ($product->in_stock > 0 && $product->getOriginal('in_stock') == 0) {
+//            $product->followers()
+//                ->get()
+//                ->each
+//                ->notify(new ProductAppearedNotification($product));
+//            dd('mail observer');
+//        }
     }
 
     /**
