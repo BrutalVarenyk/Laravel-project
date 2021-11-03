@@ -51,17 +51,11 @@ class ProductsController extends Controller
         $product->update($validated);
         if (!empty($validated['images']))
         ProductImagesService::attach($product, $validated['images']);
-        return redirect()->route('lang.admin.products');
+        return redirect()->back()->with('Product was successfully updated');
     }
 
     public function destroy(Product $product)
     {
-        ImageService::remove($product->thumbnail);
-        $product->orders()->detach();
-        $images = $product->gallery()->get();
-        if ($images->count() > 0) {
-            foreach ($images as $image) ImageService::remove($image->path);
-        }
         $product->delete();
         return redirect()->route('lang.admin.products')->with('status', __('Product deleted successfully'));
     }
