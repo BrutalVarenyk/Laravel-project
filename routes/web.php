@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('test')->name('test.')->group(function (){
+    Route::get('/{product}/mail', [\App\Observers\ProductObserver::class, 'updated']);
+});
+
+
+
 Route::get('/', function () {
     return redirect('/en/');
 });
