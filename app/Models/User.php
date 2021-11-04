@@ -65,4 +65,26 @@ class User extends Authenticatable
 
         return implode('_', $userName);
     }
+
+    public function wishes()
+    {
+        return $this->belongsToMany(
+            \App\Models\Product::class,
+            'wishlist',
+            'user_id',
+            'product_id'
+        );
+    }
+
+    public function addToWish(Product $product)
+    {
+        $this->wishes()->attach($product);
+    }
+
+    public function removeFromWish(Product $product)
+    {
+        $this->wishes()->detach($product);
+    }
+
+
 }

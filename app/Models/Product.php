@@ -62,4 +62,14 @@ class Product extends Model
 
         $this->attributes['thumbnail'] = ImageService::upload($image);
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany(
+            \App\Models\User::class,
+            'wishlist',
+            'product_id',
+            'user_id'
+        );
+    }
 }

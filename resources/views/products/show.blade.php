@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@inject('wishlist', 'App\Services\Wishlist\WishlistService')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -105,15 +105,16 @@
 {{--                        </div>--}}
 {{--                    </form>--}}
 {{--                    <hr>--}}
-{{--                    @if($wishlist->isUserFollowed($product))--}}
-{{--                        <form action="{{ route('wishlist.delete', $product) }}" method="POST">--}}
-{{--                            @csrf--}}
-{{--                            <input type="submit" class="btn btn-danger" value="Remove from Wish List">--}}
-{{--                        </form>--}}
-{{--                    @else--}}
-{{--                        <a href="{{ route('wishlist.add', $product) }}"--}}
-{{--                           class="btn btn-success">{{ __('Add to Wish List') }}</a>--}}
-{{--                    @endif--}}
+                    @if($wishlist->isUserFollowed($product))
+                        <form action="{{ route('lang.wishlist.delete', $product) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="btn btn-danger" value="{{__('Remove from Wish List')}}">
+                        </form>
+                    @else
+                        <a href="{{ route('lang.wishlist.add', $product) }}"
+                           class="btn btn-success">{{ __('Add to Wish List') }}</a>
+                    @endif
                 @endauth
             </div>
         </div>
