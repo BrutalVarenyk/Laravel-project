@@ -5,8 +5,6 @@ namespace App\Observers;
 use App\Models\Product;
 use App\Notifications\ProductAppearedNotification;
 use App\Services\Images\ImageService;
-use Illuminate\Contracts\Notifications\Dispatcher;
-use Illuminate\Support\Facades\Request;
 
 class ProductObserver
 {
@@ -29,7 +27,13 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-
+        // Notification of product appearance for product followers
+        if ($product->in_stock > 0 && $product->getOriginal('in_stock') == 0) {
+            $product->followers()
+                ->get()
+                ->each
+                ->notify(new ProductAppearedNotification($product));
+        }
     }
 
     /**
