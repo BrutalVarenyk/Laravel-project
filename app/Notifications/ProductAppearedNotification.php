@@ -19,11 +19,10 @@ class ProductAppearedNotification extends Notification
      *
      * @return void
      */
-//    public function __construct(Product $product)
-//    {
-//        logs()->info('App\Notifications\ProductAppearedNotification  __construct');
-//        $this->product = $product;
-//    }
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
 
     /**
      * Get the notification's delivery channels.
@@ -45,7 +44,6 @@ class ProductAppearedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $this->product = Product::find(1)->get();
         logs()->info('INIT: toMail');
         $url = route('lang.products.show', $this->product);
         logs()->info('END: toMail');
