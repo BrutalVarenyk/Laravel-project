@@ -42,8 +42,7 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.3",
-        "willvincent/laravel-rateable": "^2.3"
+        "laravel/ui": "^3.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

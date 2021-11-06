@@ -16146,6 +16146,8 @@ label.star {
 }
 
 input.star:checked ~ label.star:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   content: "\f005";
   color: #e74c3c;
   transition: all 0.25s;
@@ -16167,8 +16169,4 @@ label.star:hover {
 label.star:before {
   content: "\f005";
   font-family: "Font Awesome 5 Free", sans-serif;
-}
-
-div.smth {
-  color: #000;
 }
