@@ -113,6 +113,8 @@ Route::prefix(\App\Services\Localization\LocalizationService::localize())
 
         Route::delete('wishlist/{product}/delete', [\App\Http\Controllers\WishListController::class, 'delete'])
             ->name('wishlist.delete');
+
+        Route::post('rating/{product}/add', [\App\Http\Controllers\RatingController::class, 'add'])->name('rating.add');
     });
 });
 

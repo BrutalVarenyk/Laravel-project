@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Services\Images\ImageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use willvincent\Rateable\Rateable;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Rateable;
 
     protected $fillable = [
         'category_id',
@@ -71,5 +72,12 @@ class Product extends Model
             'product_id',
             'user_id'
         );
+    }
+
+    public function getUserRatingForCurrentProduct ()
+    {
+        $ratings = $this->ratings()->where('rateable_id', '=', $this->id)->get();
+
+        return $ratings->where('user_id', '=', auth()->id())->first();
     }
 }
