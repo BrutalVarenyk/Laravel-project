@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 //    Route::get('/{product}/mail', [\App\Observers\ProductObserver::class, 'updated']);
 //});
 
+Route::get('test', function () {
+    \App\Jobs\TestJob::dispatch('Test Job');
+});
 
 
 Route::get('/', function () {

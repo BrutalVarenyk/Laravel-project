@@ -50,3 +50,8 @@ label.star:before {
     content: '\f005';
     font-family: 'Font Awesome 5 Free', sans-serif;
 }
+
+.show_product:hover {
+    transform: scale(1.3);
+    transition: all .25s;
+}

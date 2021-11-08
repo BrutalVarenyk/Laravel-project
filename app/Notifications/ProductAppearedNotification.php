@@ -44,9 +44,7 @@ class ProductAppearedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        logs()->info('INIT: toMail');
         $url = route('lang.products.show', $this->product);
-        logs()->info('END: toMail');
         return (new MailMessage)
             ->line("The product {$this->product->title} from your wishlist")
             ->line('was appeared in stock')
