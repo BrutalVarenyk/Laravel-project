@@ -1,12 +1,12 @@
 @component('mail::message')
-# Introduction
 
-The body of your message. {{ $full_name }}
+{{ $full_name }}, somebody just make a purchase,
 
-@component('mail::button', ['url' => ''])
-Button Text
+Check it by order {{ $order_id }}
+
+@component('mail::button', ['url' => route('lang.admin.orders.edit', $order_id)])
+Go to order edit
 @endcomponent
 
-Thanks,<br>
 {{ config('app.name') }}
 @endcomponent

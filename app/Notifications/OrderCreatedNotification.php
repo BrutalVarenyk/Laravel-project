@@ -3,28 +3,28 @@
 namespace App\Notifications;
 
 use App\Mail\Orders\Created\Admin;
-use App\Models\User;
+use App\Mail\Orders\Created\Customer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
-class OrderCreatedNotification extends Notification
+class OrderCreatedNotification extends Notification implements ShouldQueue
 {
+    use Queueable;
 
-
-    protected $user, $orderId;
+    protected $user, $orderId, $role;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user, int $orderId)
+    public function __construct($user, int $orderId, bool $role = true)
     {
         $this->orderId = $orderId;
         $this->user = $user;
+        $this->role = $role;
     }
 
     /**
@@ -45,24 +45,9 @@ class OrderCreatedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-//        $themes = [
-//            'admin' => 'email.order_created.admin',
-//            'customer' => 'email.order_created.customer'
-//        ];
-//        $key = is_admin($this->user) ? 'admin' : 'customer';
-
-
-        logs()->debug(self::class . '@toMail');
-        return (new Admin(35, 'User Name Notification'));
-
-//        return (new Admin($this->orderId, $this->user->full_name));
-
-//        Mail::to($this->user->email)->send(new Admin($this->orderId, $this->user->full_name));
-
-//        return (new MailMessage)
-//                    ->line('The introduction to the notification.')
-//                    ->action('Notification Action', url('/'))
-//                    ->line('Thank you for using our application!');
+        return $this->role === true
+            ? new Customer($this->orderId, $this->user->full_name)
+            : new Admin($this->orderId, $this->user->full_name);
     }
 
     /**
