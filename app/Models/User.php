@@ -86,5 +86,9 @@ class User extends Authenticatable
         $this->wishes()->detach($product);
     }
 
+    public function getFullNameAttribute()
+    {
+        return $this->name . ' ' . $this->surname;
+    }
 
 }

@@ -1,7 +1,10 @@
 <?php
 
+use App\Mail\MyDemoMail;
+use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +22,26 @@ use Illuminate\Support\Facades\Route;
 //    Route::get('/{product}/mail', [\App\Observers\ProductObserver::class, 'updated']);
 //});
 
+//Route::get('test', function () {
+//    \App\Jobs\TestJob::dispatch('Test Job');
+//});
+
+Route::prefix('test')->name('test')->group( function (){
+    Route::get('/', function () {
+        \App\Jobs\TestJob::dispatch('Test Job');
+    });
+
+    Route::get('mail',function () {
+        $myEmail = 'brutalvarenyk@gmail.com';
+
+        $admin = User::where('role_id', '=', 1)->first();
+        Mail::to($myEmail)->send(new \App\Mail\Orders\Created\Admin(4, $admin->full_name));
+
+        dd("Mail Send Successfully");
+    });
+
+//    Route::get('mail', [\App\Observers\OrderObserver::class, 'created']);
+});
 
 
 Route::get('/', function () {

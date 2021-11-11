@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-md-4 show_product" onclick="window.location.href = '{{ route('lang.products.show', $product->id) }}';">
     <div class="card mb-4 shadow-sm">
         @if(Storage::has($product->thumbnail))
             <img src="{{ Storage::url($product->thumbnail) }}" class="card-img-top">
@@ -16,14 +16,14 @@
                 </div>
             </div>
             <hr>
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="{{ route('lang.products.show', $product->id) }}"
-                   class="text-muted btn btn-outline-dark">
-                    {{ __('Show') }}
-                </a>
-            </div>
-            @if(is_null($product->discount))
-                <span class="text-muted">{{ $product->getPrice() }}</span>
+{{--            <div class="d-flex justify-content-between align-items-center">--}}
+{{--                <a href="{{ route('lang.products.show', $product->id) }}"--}}
+{{--                   class="text-muted btn btn-outline-dark">--}}
+{{--                    {{ __('Show') }}--}}
+{{--                </a>--}}
+{{--            </div>--}}
+            @if($product->discount == 0 || is_null($product->discount))
+                <span class="text-muted">{{ $product->getPrice() }}$</span>
             @else
                 <span style="text-decoration: line-through; margin-right: 10px">{{ $product->price }}$</span>
                 <span class="text-muted">{{ $product->getPrice() }}$</span>

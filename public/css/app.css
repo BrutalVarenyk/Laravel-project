@@ -16170,3 +16170,12 @@ label.star:before {
   content: "\f005";
   font-family: "Font Awesome 5 Free", sans-serif;
 }
+
+div.show_product:hover {
+    transform: scale(1.05);
+    transition: all .25s;
+}
+
+div.show_product{
+    transition: all .25s;
+}

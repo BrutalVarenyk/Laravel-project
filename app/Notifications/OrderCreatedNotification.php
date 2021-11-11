@@ -2,26 +2,29 @@
 
 namespace App\Notifications;
 
-use App\Models\Product;
+use App\Mail\Orders\Created\Admin;
+use App\Mail\Orders\Created\Customer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Mail;
 
-class ProductAppearedNotification extends Notification implements ShouldQueue
+class OrderCreatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $product;
+    protected $user, $orderId, $role;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Product $product)
+    public function __construct($user, int $orderId, bool $role = true)
     {
-        $this->product = $product;
+        $this->orderId = $orderId;
+        $this->user = $user;
+        $this->role = $role;
     }
 
     /**
@@ -32,7 +35,6 @@ class ProductAppearedNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        logs()->info('App\Notifications\ProductAppearedNotification  via');
         return ['mail'];
     }
 
@@ -40,16 +42,12 @@ class ProductAppearedNotification extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        $url = route('lang.products.show', $this->product);
-        return (new MailMessage)
-            ->line("The product {$this->product->title} from your wishlist")
-            ->line('was appeared in stock')
-            ->action('Go to product Page', $url)
-            ->line('Thank you for using our shop!');
+        return $this->role === true
+            ? new Customer($this->orderId, $this->user->full_name)
+            : new Admin($this->orderId, $this->user->full_name);
     }
 
     /**
