@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Product;
 use App\Notifications\ProductAppearedNotification;
+use App\Notifications\ProductDiscountNotification;
 use App\Services\Images\ImageService;
 
 class ProductObserver
@@ -34,6 +35,15 @@ class ProductObserver
                 ->each
                 ->notify(new ProductAppearedNotification($product));
         }
+
+        if ($product->discount > 0
+            && ($product->getOriginal('discount') == 0 || is_null($product->getOriginal('discount')))) {
+            $product->followers()
+                ->get()
+                ->each
+                ->notify(new ProductDiscountNotification($product));
+        }
+
     }
 
     /**

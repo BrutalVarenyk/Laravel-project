@@ -29,7 +29,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-8">
-                        @if(is_null($product->discount))
+                        @if(is_null($product->discount) || $product->discount == 0)
                             <p>Price: {{ $product->getPrice() }}$</p>
                         @else
                             <p>Price: <span
