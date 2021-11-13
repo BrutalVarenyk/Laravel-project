@@ -17,7 +17,7 @@ class OrderObserver
     public function created(Order $order)
     {
         $user = $order->user()->first();
-        $user->notify(new OrderCreatedNotification($user, $order->id));
+        $user->notify((new OrderCreatedNotification($user, $order->id))->delay(30)->onQueue('email'));
 
         $admin = User::where('role_id', '=', 1)->first();
         $admin->notify(new OrderCreatedNotification($admin, $order->id, false));
