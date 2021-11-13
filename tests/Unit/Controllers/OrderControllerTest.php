@@ -52,7 +52,7 @@ class OrderControllerTest extends TestCase
 
         $this->user = User::factory(1, ['role_id' => $role->id])->create()->first();
 
-        $this->status = OrderStatus::where('name', '=', Config::get('constants.db.order_statuses.in_process'))->first();
+        OrderStatus::create(['name' => Config::get('constants.db.order_statuses.in_process')]);
 
         dd($this->user, $this->products, Cart::instance('cart')->content());
     }
