@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = User::with('role')->find(auth()->user()->id)->first();
+        $user = auth()->user();
         return view('account/index', compact('user'));
     }
 
