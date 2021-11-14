@@ -36,6 +36,11 @@ class OrderRepository implements  OrderRepositoryInterface
             'balance' => $user->balance - $total
         ];
 
+        $balance = $user->balance;
+        $user->update($userBalance);
+
+        dd($balance, $user->balance, $userBalance);
+
         return $order;
 
     }

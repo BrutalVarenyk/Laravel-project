@@ -16,6 +16,34 @@ class CreateOrderRequest extends FormRequest
         return auth()->check();
     }
 
+    public function messages()
+    {
+        // Error's messages
+        return [
+            'name.required' => 'Name should be filled',
+            'name.min' => 'Name should be more than 2 symbols',
+            'name.max' => 'Name should be less than 35 symbols',
+
+            'surname.required' => 'Surname should be filled',
+            'surname.min' => 'Surname should be more than 2 symbols',
+            'surname.max' => 'Surname should be less than 50 symbols',
+
+            'phone.required' => 'Phone should be filled',
+
+            'email.required' => 'Email should be filled',
+
+            'country.required' => 'Country should be filled',
+            'country.min' => 'Country should be more than 2 symbols',
+
+            'city.required' => 'City should be filled',
+            'city.min' => 'City should be more than 2 symbols',
+
+            'address.required' => 'Address should be filled',
+            'address.min' => 'Address should be more than 2 symbols',
+
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
