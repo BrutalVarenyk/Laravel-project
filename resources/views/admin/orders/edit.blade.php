@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-5">
                 @include('admin.orders.parts.summary_table', ['products' => $products])
-                @include('admin.orders.parts.taxes', ['order' => $order])
+{{--                @include('admin.orders.parts.taxes', ['order' => $order])--}}
             </div>
         </div>
     </div>
