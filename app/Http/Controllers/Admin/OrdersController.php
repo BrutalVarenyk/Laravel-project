@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderStatus;
 
 class OrdersController extends Controller
 {
@@ -17,7 +18,8 @@ class OrdersController extends Controller
 
     public function edit(Order $order)
     {
+        $statuses = OrderStatus::all();
         $products = $order->products()->get();
-        return view('admin/orders/{order}/edit', compact('order', 'products'));
+        return view('admin/orders/edit', compact('order', 'products', 'statuses'));
     }
 }

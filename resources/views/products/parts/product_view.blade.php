@@ -16,12 +16,6 @@
                 </div>
             </div>
             <hr>
-{{--            <div class="d-flex justify-content-between align-items-center">--}}
-{{--                <a href="{{ route('lang.products.show', $product->id) }}"--}}
-{{--                   class="text-muted btn btn-outline-dark">--}}
-{{--                    {{ __('Show') }}--}}
-{{--                </a>--}}
-{{--            </div>--}}
             @if($product->discount == 0 || is_null($product->discount))
                 <span class="text-muted">{{ $product->getPrice() }}$</span>
             @else
