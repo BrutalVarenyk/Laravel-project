@@ -2,11 +2,6 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-{{--            @if ($message = Session::get('success'))--}}
-{{--                <div class="alert alert-success">--}}
-{{--                    <p>{{ $message }}</p>--}}
-{{--                </div>--}}
-{{--            @endif--}}
             <div class="col-md-12">
                 <h3 class="text-center">{{ __('Orders') }}</h3>
             </div>
@@ -36,9 +31,14 @@
                                     <div class="card" style="width: 18rem;">
                                         <ul class="list-group list-group-flush">
                                             @foreach($order->products()->where('order_id', $order->id)->get() as $product)
-                                                <li class="list-group-item">{{ $product->title }}
-                                                    x{{ $product->pivot->quantity }}
-                                                </li>
+                                                <div onclick="window.location.href = '{{ route('lang.products.show', $product->id) }}'"
+                                                     style="cursor: pointer"
+                                                     class="show_product">
+                                                    <li class="list-group-item" >
+                                                        {{ $product->title }}
+                                                        x{{ $product->pivot->quantity }}
+                                                    </li>
+                                                </div>
                                             @endforeach
                                         </ul>
                                     </div>
