@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('account.parts.nav')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @include('account.parts.nav')
                 <div class="card">
                     <div class="card-header">{{ __('Edit Profile Data') }}</div>
                     @if ($errors->any())

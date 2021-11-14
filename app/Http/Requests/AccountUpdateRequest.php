@@ -26,11 +26,12 @@ class AccountUpdateRequest extends FormRequest
     {
         $userId = auth()->user()->id;
         return [
-            'name' => 'required|min:2|max:35',
-            'surname' => 'required|min:2|max:50',
+            'name' => ['required', 'min:2', 'max:35'],
+            'surname' => ['required', 'min:2', 'max:50'],
             'phone' => ['required', Rule::unique('users', 'phone')->ignore($userId)],
-            'email' => ['required', Rule::unique('users', 'email')->ignore($userId)],
-            'birthdate' => ['required', 'date']
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($userId)],
+            'birthdate' => ['required', 'date'],
+            'balance' => ['numeric', 'min:0']
         ];
     }
 }
