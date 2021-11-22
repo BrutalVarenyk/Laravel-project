@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Observers\OrderObserver;
 use App\Observers\ProductObserver;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -34,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         Product::observe(ProductObserver::class);
         Order::observe(OrderObserver::class);
+//        JsonResource::withoutWrapping();
     }
 }

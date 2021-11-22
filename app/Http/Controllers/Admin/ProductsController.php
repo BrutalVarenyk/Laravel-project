@@ -56,6 +56,7 @@ class ProductsController extends Controller
 
     public function destroy(Product $product)
     {
+        $product->orders()->detach();
         $product->delete();
         return redirect()->route('lang.admin.products')->with('status', __('Product deleted successfully'));
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Services\Images\ImageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use willvincent\Rateable\Rateable;
 
 class Product extends Model
@@ -22,6 +23,12 @@ class Product extends Model
         'in_stock',
         'thumbnail'
     ];
+
+    protected $hidden = [
+        "created_at",
+        "updated_at"
+    ];
+
 
     public function gallery()
     {
@@ -43,6 +50,16 @@ class Product extends Model
         return $this->hasOne(OrderProduct::class);
     }
 
+    public function followers()
+    {
+        return $this->belongsToMany(
+            \App\Models\User::class,
+            'wishlist',
+            'product_id',
+            'user_id'
+        );
+    }
+
     public function getPrice()
     {
 
@@ -57,21 +74,20 @@ class Product extends Model
     //Mutator
     public function setThumbnailAttribute($image)
     {
-        if (!empty($this->attributes['thumbnail'])) {
-            ImageService::remove($this->attributes['thumbnail']);
+        if (!is_string($image)) {
+            if (!empty($this->attributes['thumbnail'])) {
+                ImageService::remove($this->attributes['thumbnail']);
+            }
+            $this->attributes['thumbnail'] = ImageService::upload($image);
+        } else {
+            $this->attributes['thumbnail'] = getenv('APP_URL') . $image ;
         }
 
-        $this->attributes['thumbnail'] = ImageService::upload($image);
     }
 
-    public function followers()
+    public function scopeAvailable()
     {
-        return $this->belongsToMany(
-            \App\Models\User::class,
-            'wishlist',
-            'product_id',
-            'user_id'
-        );
+        return $this->where('in_stock', '>', '0');
     }
 
     public function getUserRatingForCurrentProduct ()

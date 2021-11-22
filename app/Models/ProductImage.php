@@ -5,10 +5,18 @@ namespace App\Models;
 use App\Services\Images\ImageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ProductImage extends Model
 {
     use HasFactory;
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'product_id'
+
+    ];
 
     protected $fillable = ['path', 'product_id'];
 
@@ -20,6 +28,11 @@ class ProductImage extends Model
     // Mutator
     public function setPathAttribute($image)
     {
-        $this->attributes['path'] = ImageService::upload($image);
+        if (!is_string($image)) {
+            $this->attributes['path'] = ImageService::upload($image);
+        } else {
+            $this->attributes['path'] = getenv('APP_URL') . $image;
+        }
+
     }
 }
